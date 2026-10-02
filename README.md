@@ -38,7 +38,7 @@ Served as a static-assets-only Worker (see `wrangler.toml`).
 
 **Git integration (dashboard):** Workers & Pages → Create → Import a repository.
 Build command: *(empty)*, deploy command: `npx wrangler deploy`.
-The Worker name must match `name` in `wrangler.toml` (`rolando-scott`).
+The Worker name must match `name` in `wrangler.toml` (`reas-site`).
 
 **From your machine:**
 
