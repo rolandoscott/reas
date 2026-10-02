@@ -6,7 +6,7 @@ Static site, no build step. Everything that ships lives in `public/`:
 public/
 ├── index.html
 ├── 404.html
-├── _headers              # Cloudflare Pages security + cache headers (CSP etc.)
+├── _headers              # security + cache headers (Cloudflare) (CSP etc.)
 ├── favicon.svg
 ├── robots.txt
 └── assets/
@@ -28,17 +28,20 @@ public/
 ## Local preview
 
 ```sh
-npx wrangler pages dev        # uses wrangler.toml, honours _headers
+npx wrangler dev              # uses wrangler.toml, honours _headers
 # or simply: python3 -m http.server -d public 8080
 ```
 
-## Deploy to Cloudflare Pages
+## Deploy to Cloudflare Workers
 
-**Git integration (dashboard):** Workers & Pages → Create → Pages → connect repo.
-Framework preset: *None*, build command: *(empty)*, build output directory: `public`.
+Served as a static-assets-only Worker (see `wrangler.toml`).
 
-**Direct upload (CLI):**
+**Git integration (dashboard):** Workers & Pages → Create → Import a repository.
+Build command: *(empty)*, deploy command: `npx wrangler deploy`.
+The Worker name must match `name` in `wrangler.toml` (`rolando-scott`).
+
+**From your machine:**
 
 ```sh
-npx wrangler pages deploy
+npx wrangler deploy
 ```
