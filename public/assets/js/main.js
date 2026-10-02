@@ -12,7 +12,7 @@
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- Costa Rica clock ------------------------------------------------- */
+  /* ---- Costa Rica time (terminal "time" command) ----------------------- */
   const sjoFormat = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'America/Costa_Rica',
     hour: '2-digit',
@@ -21,28 +21,7 @@
     hour12: false
   });
 
-  function sjoTime() {
-    const p = Object.fromEntries(sjoFormat.formatToParts(new Date()).map(x => [x.type, x.value]));
-    return { h: +p.hour % 24, m: +p.minute, s: +p.second, str: `${p.hour}:${p.minute}:${p.second}` };
-  }
-
-  function initClock() {
-    const label = document.querySelector('[data-clock]');
-    const hands = {};
-    document.querySelectorAll('[data-hand]').forEach(el => { hands[el.dataset.hand] = el; });
-    if (!label) return;
-
-    const tick = () => {
-      const t = sjoTime();
-      label.textContent = t.str;
-      label.dateTime = t.str;
-      hands.hour?.setAttribute('transform', `rotate(${(t.h % 12) * 30 + t.m * 0.5} 12 12)`);
-      hands.minute?.setAttribute('transform', `rotate(${t.m * 6 + t.s * 0.1} 12 12)`);
-      hands.second?.setAttribute('transform', `rotate(${t.s * 6} 12 12)`);
-    };
-    tick();
-    setInterval(tick, 1000);
-  }
+  const sjoTime = () => sjoFormat.format(new Date());
 
   /* ---- Typewriter tagline ---------------------------------------------- */
   function initTypewriter() {
@@ -69,21 +48,6 @@
       .then(() => type(elA, a, 55))
       .then(() => wait(750))
       .then(() => type(elB, b, 75));
-  }
-
-  /* ---- Pointer-following ember grid ------------------------------------ */
-  function initEmber() {
-    const page = document.querySelector('.page');
-    const ember = document.querySelector('.ember');
-    if (!page || !ember || !window.matchMedia('(hover: hover)').matches) return;
-
-    page.addEventListener('mousemove', e => {
-      const r = page.getBoundingClientRect();
-      ember.style.setProperty('--x', `${e.clientX - r.left}px`);
-      ember.style.setProperty('--y', `${e.clientY - r.top}px`);
-      ember.classList.add('is-active');
-    });
-    page.addEventListener('mouseleave', () => ember.classList.remove('is-active'));
   }
 
   /* ---- Terminal --------------------------------------------------------- */
@@ -155,7 +119,7 @@
         print('Got one burning? → type "hire"', 'dim');
       },
       time() {
-        print(`SJO ${sjoTime().str} (UTC−6)`);
+        print(`SJO ${sjoTime()} (UTC−6)`);
       },
       sudo() {
         print('Nice try. Permission denied.', 'hi');
@@ -219,8 +183,6 @@
     });
   }
 
-  initClock();
   initTypewriter();
-  initEmber();
   initTerminal();
 })();

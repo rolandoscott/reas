@@ -11,7 +11,7 @@ public/
 ├── robots.txt
 └── assets/
     ├── css/styles.css    # all styles
-    ├── js/main.js        # all behaviour (clock, typewriter, ember grid, terminal)
+    ├── js/main.js        # all behaviour (typewriter, terminal)
     ├── fonts/            # self-hosted woff2 (Bricolage Grotesque, Instrument Sans, JetBrains Mono)
     └── img/
 ```

@@ -60,36 +60,36 @@
 
 /* ---- Tokens ------------------------------------------------------------- */
 :root {
-  /* Black & red */
-  --c-bg: #0a0a0a;
-  --c-grid: #161616;
-  --c-panel: #141414;
-  --c-surface: rgba(17, 17, 17, 0.94);
-  --c-surface-glass: rgba(10, 10, 10, 0.82);
-  --c-deep: #050505;
-  --c-deep-glass: rgba(5, 5, 5, 0.86);
-  --c-button: #161616;
-  --c-backdrop: rgba(0, 0, 0, 0.7);
+  /* Light: white surfaces, near-black text, one red accent */
+  --c-bg: #f7f7f5;
+  --c-grid: #ebebe8;
+  --c-panel: #e9e9e7;
+  --c-surface: rgba(255, 255, 255, 0.96);
+  --c-surface-glass: rgba(255, 255, 255, 0.9);
+  --c-deep: #f4f4f2;
+  --c-deep-glass: rgba(255, 255, 255, 0.92);
+  --c-button: #fff;
+  --c-backdrop: rgba(10, 10, 10, 0.45);
+  --c-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.06);
 
-  --c-line: #2e2e2e;
-  --c-line-soft: #222;
-  --c-line-faint: #262626;
-  --c-rule: #262626;
+  --c-line: #d9d9d6;
+  --c-line-soft: #e6e6e3;
+  --c-line-faint: #e4e4e1;
+  --c-rule: #e6e6e3;
 
-  --c-ink: #f5f2ee;
-  --c-body: #c9c9c9;
-  --c-muted: #a3a3a3;
-  --c-dim: #8a8a8a;
-  --c-soft-accent: #ff8a80;
+  --c-ink: #111;
+  --c-body: #3a3a3a;
+  --c-muted: #5f5f5f;
+  --c-dim: #6e6e6e;
+  --c-soft-accent: #c8102e;
 
-  /* Bright red for text/icons on black; deeper "fire engine" red for fills
-     behind white text — both keep WCAG AA contrast. */
-  --c-accent: #ff3b30;
-  --c-accent-rgb: 255, 59, 48;
+  /* "Fire engine" red — passes WCAG AA as text on white and behind white text */
+  --c-accent: #c8102e;
+  --c-accent-rgb: 200, 16, 46;
   --c-fill: #c8102e;
-  --c-fill-hover: #e01b3a;
+  --c-fill-hover: #a50d26;
   --c-on-fill: #fff;
-  --c-ok: #7ee0a1;
+  --c-ok: #15803d;
   --c-warn: #ffb43a;
   --c-on-warn: #1a0f08;
   --c-danger: #c4122f;
@@ -155,8 +155,6 @@ kbd { font: inherit; }
 .mono { font-family: var(--f-mono); font-size: 13px; }
 .text-accent { color: var(--c-accent); }
 .text-dim { color: var(--c-dim); }
-.text-ok { color: var(--c-ok); }
-
 .dot {
   display: block;
   width: 8px;
@@ -165,20 +163,6 @@ kbd { font: inherit; }
 }
 .dot--accent { background: var(--c-accent); }
 .dot--red { width: 6px; height: 6px; background: var(--c-danger); }
-
-.icon {
-  display: block;
-  width: 20px;
-  height: 20px;
-  color: var(--c-dim);
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.icon--accent { color: var(--c-accent); }
-.icon--rotate { transform: rotate(90deg); }
 
 .eyebrow {
   font-size: 13px;
@@ -205,26 +189,6 @@ kbd { font: inherit; }
   background-size: var(--grid-size) var(--grid-size);
 }
 
-/* Glowing grid that follows the pointer (position set from JS) */
-.ember {
-  --x: -600px;
-  --y: -600px;
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s;
-  background-image:
-    radial-gradient(260px circle at var(--x) var(--y), rgba(var(--c-accent-rgb), 0.12), transparent 70%),
-    linear-gradient(rgba(var(--c-accent-rgb), 0.55) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--c-accent-rgb), 0.55) 1px, transparent 1px);
-  background-size: 100% 100%, var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
-  -webkit-mask-image: radial-gradient(220px circle at var(--x) var(--y), #000, transparent);
-  mask-image: radial-gradient(220px circle at var(--x) var(--y), #000, transparent);
-}
-.ember.is-active { opacity: 1; }
-
 .layout {
   position: relative;
   z-index: 1;
@@ -240,6 +204,7 @@ kbd { font: inherit; }
   position: relative;
   max-width: 100%;
   border-radius: var(--radius-card);
+  box-shadow: var(--c-shadow);
 }
 
 /* ---- Portrait card ------------------------------------------------------ */
@@ -254,12 +219,12 @@ kbd { font: inherit; }
   position: absolute;
   inset: 0;
 }
-/* Darken the bottom of the photo so the chips and stats stay legible */
+/* Darken the bottom of the photo so the location chip and stats stay legible */
 .portrait__media::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 55%, rgba(0, 0, 0, 0.75));
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.35));
 }
 
 .portrait__img {
@@ -277,29 +242,9 @@ kbd { font: inherit; }
   pointer-events: none;
 }
 
-.portrait__flightpath {
-  position: absolute;
-  top: 8%;
-  left: 6%;
-  width: 88%;
-  height: 30%;
-  color: var(--c-accent);
-  opacity: 0.7;
-}
-
-.portrait__plane {
-  position: absolute;
-  top: calc(8% - 6px);
-  right: 3%;
-  width: 30px;
-  height: 30px;
-  color: var(--c-accent);
-  transform: rotate(80deg);
-}
-
 .thermal-badge {
   position: absolute;
-  top: 58px;
+  top: 14px;
   right: 14px;
   display: none;
   align-items: center;
@@ -314,53 +259,7 @@ kbd { font: inherit; }
 }
 .portrait:hover .thermal-badge { display: flex; }
 
-/* Clock */
-.clock {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 12px 6px 6px;
-  border-radius: 999px;
-  background: var(--c-surface-glass);
-  border: 1px solid var(--c-line);
-}
-
-.clock__face {
-  display: block;
-  width: 28px;
-  height: 28px;
-}
-
-.clock__bezel { fill: var(--c-deep); stroke: var(--c-line); stroke-width: 1; }
-.clock__ticks { stroke: var(--c-dim); stroke-width: 1; }
-.clock__hand { stroke: var(--c-ink); stroke-linecap: round; }
-.clock__hand--second { stroke: var(--c-accent); }
-.clock__pin { fill: var(--c-accent); }
-
-.clock__text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  font-family: var(--f-mono);
-}
-
-.clock__time {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--c-ink);
-}
-
-.clock__zone {
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--c-muted);
-}
-
-/* Footer: chips + stats */
+/* Footer: location chip + stats */
 .portrait__footer {
   position: absolute;
   left: 14px;
@@ -371,15 +270,8 @@ kbd { font: inherit; }
   gap: 10px;
 }
 
-.portrait__chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
 .chip {
+  align-self: flex-start;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -388,14 +280,6 @@ kbd { font: inherit; }
   background: var(--c-surface-glass);
   font-size: 13px;
   color: var(--c-ink);
-}
-
-.chip--mono {
-  display: inline;
-  padding: 5px 9px;
-  border-radius: 6px;
-  font-family: var(--f-mono);
-  font-size: 11px;
 }
 
 .stats {
@@ -486,6 +370,7 @@ kbd { font: inherit; }
   height: 55px;
   margin: -6px 0 -6px 8px;
   object-fit: contain;
+  filter: invert(1); /* the logo artwork is white-on-transparent */
 }
 
 /* About */
@@ -495,27 +380,6 @@ kbd { font: inherit; }
   gap: clamp(12px, 2vh, 20px);
   padding-top: clamp(18px, 3vh, 32px);
   border-top: 1px solid var(--c-rule);
-}
-
-.about__bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-.about__prompt {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-}
-
-.about__icons {
-  display: flex;
-  align-items: center;
-  gap: 14px;
 }
 
 .shell-btn {
@@ -578,11 +442,23 @@ kbd { font: inherit; }
 }
 
 .bio {
-  max-width: 72ch;
-  font-size: clamp(14px, 1vw, 15.5px);
-  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9em;
+  max-width: 68ch;
+  font-size: clamp(15px, 1.05vw, 16.5px);
+  line-height: 1.6;
   color: var(--c-body);
   text-wrap: pretty;
+}
+
+.shell-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--c-dim);
 }
 
 /* ---- Calls to action ---------------------------------------------------- */
@@ -625,14 +501,6 @@ kbd { font: inherit; }
   color: var(--c-on-fill);
 }
 
-.cta__pulse {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  animation: rs-alarm 2.4s ease-out 4;
-}
-
 .cta__text {
   display: flex;
   flex-direction: column;
@@ -671,6 +539,18 @@ kbd { font: inherit; }
 
 /* ---- Terminal dialog ---------------------------------------------------- */
 .term {
+  /* The terminal stays dark: re-scope the colour tokens */
+  --c-bg: #111;
+  --c-deep: #0a0a0a;
+  --c-line: #2e2e2e;
+  --c-line-soft: #222;
+  --c-ink: #f5f2ee;
+  --c-body: #c9c9c9;
+  --c-muted: #a3a3a3;
+  --c-dim: #8a8a8a;
+  --c-accent: #ff3b30;
+  --c-ok: #7ee0a1;
+
   width: min(640px, calc(100% - 40px));
   height: min(420px, 80vh);
   max-width: none;
@@ -681,7 +561,7 @@ kbd { font: inherit; }
   border: 1px solid var(--c-line);
   background: var(--c-deep);
   color: var(--c-ink);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
   font-family: var(--f-mono);
   font-size: 13px;
 }
@@ -784,18 +664,6 @@ kbd { font: inherit; }
 /* ---- Animations --------------------------------------------------------- */
 @keyframes rs-blink {
   50% { opacity: 0; }
-}
-
-@keyframes rs-alarm {
-  0% {
-    box-shadow: 0 0 0 0 rgba(var(--c-accent-rgb), 0.6), 0 0 0 0 rgba(var(--c-accent-rgb), 0);
-  }
-  70% {
-    box-shadow: 0 0 0 12px rgba(var(--c-accent-rgb), 0), 0 0 34px 6px rgba(var(--c-accent-rgb), 0.35);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(var(--c-accent-rgb), 0), 0 0 0 0 rgba(var(--c-accent-rgb), 0);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
