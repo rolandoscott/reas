@@ -187,7 +187,7 @@ kbd { font: inherit; }
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1180px;
+  max-width: 1320px;
   display: flex;
   flex-wrap: wrap-reverse;
   align-items: stretch;
@@ -203,7 +203,7 @@ kbd { font: inherit; }
 
 /* ---- Portrait card ------------------------------------------------------ */
 .portrait {
-  flex: 1 1 280px;
+  flex: 1 1 440px;
   min-height: min(46vh, 380px);
   overflow: hidden;
   background: var(--c-panel);
@@ -308,7 +308,7 @@ kbd { font: inherit; }
 
 /* ---- Content card ------------------------------------------------------- */
 .content {
-  flex: 2 1 440px;
+  flex: 1.1 1 480px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -472,7 +472,7 @@ kbd { font: inherit; }
 }
 
 .cta--primary {
-  flex: 1 1 300px;
+  flex: 1 1 220px;
   justify-content: space-between;
   gap: 16px;
   border-color: transparent;
