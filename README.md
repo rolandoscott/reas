@@ -17,7 +17,7 @@ public/
     └── img/
 ```
 
-`tools/gen-circuit.py` regenerates the circuit-board background tile.
+`tools/gen-code-bg.py` regenerates the code-texture background tile.
 
 `design-source/` holds the original Claude Design export for reference; it is not deployed.
 

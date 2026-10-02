@@ -63,7 +63,7 @@
   /* Light: white surfaces, near-black text, one red accent */
   --c-bg: #f7f7f5;
   --c-panel: #e9e9e7;
-  --c-surface: rgba(255, 255, 255, 0.96);
+  --c-surface: #fff;
   --c-surface-glass: rgba(255, 255, 255, 0.9);
   --c-deep: #f4f4f2;
   --c-deep-glass: rgba(255, 255, 255, 0.92);
@@ -175,9 +175,20 @@ kbd { font: inherit; }
   padding: clamp(16px, 4vw, 56px);
   overflow: hidden;
   background-color: var(--c-bg);
-  /* Faint circuit-board traces, tiled behind the cards */
-  background-image: url('../img/bg-circuit.svg');
-  background-size: 720px 720px;
+}
+
+/* Faint texture of config, code and shell snippets, strongest around the
+   cards and fading out towards the page edges */
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('../img/bg-code.svg') center / 980px 720px;
+  opacity: 0.4;
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 30%, transparent 100%);
 }
 
 .layout {
