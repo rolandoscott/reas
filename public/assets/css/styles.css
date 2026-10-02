@@ -90,9 +90,6 @@
   --c-fill-hover: #a50d26;
   --c-on-fill: #fff;
   --c-ok: #15803d;
-  --c-warn: #ffb43a;
-  --c-on-warn: #1a0f08;
-  --c-danger: #c4122f;
 
   --f-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --f-body: 'Instrument Sans', Helvetica, Arial, sans-serif;
@@ -149,8 +146,6 @@ kbd { font: inherit; }
   border: 0;
 }
 
-.svg-defs { position: absolute; }
-
 /* ---- Utilities ---------------------------------------------------------- */
 .mono { font-family: var(--f-mono); font-size: 13px; }
 .text-accent { color: var(--c-accent); }
@@ -162,7 +157,6 @@ kbd { font: inherit; }
   border-radius: 50%;
 }
 .dot--accent { background: var(--c-accent); }
-.dot--red { width: 6px; height: 6px; background: var(--c-danger); }
 
 .eyebrow {
   font-size: 13px;
@@ -219,13 +213,6 @@ kbd { font: inherit; }
   position: absolute;
   inset: 0;
 }
-/* Darken the bottom of the photo so the location chip and stats stay legible */
-.portrait__media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.35));
-}
 
 .portrait__img {
   width: 100%;
@@ -234,30 +221,29 @@ kbd { font: inherit; }
   object-position: 40% 30%;
 }
 
-.portrait:hover .portrait__media { filter: url(#rs-thermal) contrast(1.1); }
+/* Halftone print effect: a rotated dot screen is colour-dodged onto a dark,
+   softened greyscale photo, then extreme contrast snaps it to solid ink dots. */
+.halftone {
+  overflow: hidden;
+  background: #fff;
+  filter: contrast(20);
+}
+.halftone .portrait__img { filter: grayscale(1) brightness(0.5) contrast(1.3) blur(1px); }
+.halftone::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle, #000, #fff) 0 0 / 5px 5px;
+  mix-blend-mode: color-dodge;
+  transform: rotate(25deg);
+  pointer-events: none;
+}
 
 .portrait__overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
-
-.thermal-badge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  display: none;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  background: var(--c-warn);
-  color: var(--c-on-warn);
-  font-family: var(--f-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-}
-.portrait:hover .thermal-badge { display: flex; }
 
 /* Footer: location chip + stats */
 .portrait__footer {
@@ -338,6 +324,13 @@ kbd { font: inherit; }
   justify-content: space-between;
   align-items: flex-end;
   gap: 16px 32px;
+}
+
+.content__id {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
 }
 
 .name {
@@ -450,15 +443,6 @@ kbd { font: inherit; }
   line-height: 1.6;
   color: var(--c-body);
   text-wrap: pretty;
-}
-
-.shell-hint {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--c-dim);
 }
 
 /* ---- Calls to action ---------------------------------------------------- */

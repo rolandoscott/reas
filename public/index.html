@@ -21,23 +21,11 @@
   <script src="/assets/js/main.js" defer></script>
 </head>
 <body>
-  <!-- SVG filter used for the portrait's "thermal camera" hover effect -->
-  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
-    <filter id="rs-thermal">
-      <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0 0 0 1 0"></feColorMatrix>
-      <feComponentTransfer>
-        <feFuncR type="table" tableValues="0.08 0.5 0.9 1 1"></feFuncR>
-        <feFuncG type="table" tableValues="0.02 0.04 0.22 0.62 0.97"></feFuncG>
-        <feFuncB type="table" tableValues="0.25 0.5 0.12 0 0.7"></feFuncB>
-      </feComponentTransfer>
-    </filter>
-  </svg>
-
   <main class="page" id="main">
     <div class="layout">
       <!-- Portrait card -->
       <aside class="card portrait" aria-label="At a glance">
-        <div class="portrait__media">
+        <div class="portrait__media halftone">
           <picture>
             <source srcset="/assets/img/rolando.webp" type="image/webp">
             <img class="portrait__img" src="/assets/img/rolando.jpg" alt="Black-and-white portrait of Rolando Scott" width="512" height="512">
@@ -45,8 +33,6 @@
         </div>
 
         <div class="portrait__overlay">
-          <span class="thermal-badge" aria-hidden="true"><span class="dot dot--red"></span>Thermal</span>
-
           <div class="portrait__footer">
             <span class="chip"><span class="dot dot--accent" aria-hidden="true"></span>Remote · Costa Rica</span>
 
@@ -71,7 +57,12 @@
       <!-- Main content card -->
       <section class="card content" aria-labelledby="name">
         <header class="content__header">
-          <h1 class="name" id="name">Rolando<br>Scott</h1>
+          <div class="content__id">
+            <h1 class="name" id="name">Rolando<br>Scott</h1>
+            <button class="shell-btn" type="button" data-term-open aria-haspopup="dialog" aria-keyshortcuts="/">
+              <kbd>/</kbd>open shell
+            </button>
+          </div>
           <div class="role">
             <span class="eyebrow">Currently</span>
             <p class="role__title">
@@ -116,13 +107,6 @@
             <span class="text-accent" aria-hidden="true">↓</span>
           </a>
         </nav>
-
-        <p class="shell-hint">
-          Prefer the command line?
-          <button class="shell-btn" type="button" data-term-open aria-haspopup="dialog" aria-keyshortcuts="/">
-            <kbd>/</kbd>open shell
-          </button>
-        </p>
       </section>
     </div>
   </main>

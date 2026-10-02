@@ -12,6 +12,7 @@ public/
 └── assets/
     ├── css/styles.css    # all styles
     ├── js/main.js        # all behaviour (typewriter, terminal)
+    ├── data/cities.json  # world cities for the terminal's `fly` command (lazy-loaded)
     ├── fonts/            # self-hosted woff2 (Bricolage Grotesque, Instrument Sans, JetBrains Mono)
     └── img/
 ```
@@ -44,3 +45,10 @@ The Worker name must match `name` in `wrangler.toml` (`reas-site`).
 ```sh
 npx wrangler deploy
 ```
+
+## Credits
+
+City data for the terminal's `fly` command comes from [GeoNames](https://www.geonames.org/)
+(`cities15000`, licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)),
+trimmed to cities with 100k+ people, all capitals, and all Costa Rican towns.
+Flight times are rough estimates from great-circle distance.
