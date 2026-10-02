@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rolando Scott — Solutions Lead · Web Platform Migrations &amp; Security</title>
+  <meta name="description" content="Rolando Scott is an engineering leader with 20+ years building, securing and rescuing websites — Drupal &amp; WordPress migrations, WAF and bot management, incident response.">
+  <meta name="theme-color" content="#0f1a2b">
+  <meta name="color-scheme" content="dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rolando Scott — I put out fires">
+  <meta property="og:description" content="Engineering leader with 20+ years building, securing and rescuing websites. 15 years a volunteer firefighter.">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <link rel="preload" href="/assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script src="/assets/js/main.js" defer></script>
+</head>
+<body>
+  <!-- SVG filter used for the portrait's "thermal camera" hover effect -->
+  <svg class="svg-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="rs-thermal">
+      <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0 0 0 1 0"></feColorMatrix>
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.08 0.5 0.9 1 1"></feFuncR>
+        <feFuncG type="table" tableValues="0.02 0.04 0.22 0.62 0.97"></feFuncG>
+        <feFuncB type="table" tableValues="0.25 0.5 0.12 0 0.7"></feFuncB>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+
+  <main class="page" id="main">
+    <div class="ember" aria-hidden="true"></div>
+
+    <div class="layout">
+      <!-- Portrait card -->
+      <aside class="card portrait" aria-label="At a glance">
+        <div class="portrait__media">
+          <img class="portrait__img" src="/assets/img/portrait.jpg" alt="Portrait of Rolando Scott">
+        </div>
+
+        <div class="portrait__overlay">
+          <svg class="portrait__flightpath" viewBox="0 0 300 200" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 7" aria-hidden="true" focusable="false"><path d="M0 190 C 80 40, 200 20, 290 30"/></svg>
+          <svg class="portrait__plane icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+
+          <div class="clock">
+            <svg class="clock__face" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="11" fill="#0a121f" stroke="#3a4d6b" stroke-width="1"/>
+              <path d="M12 2.5v1.6M21.5 12h-1.6M12 21.5v-1.6M2.5 12h1.6" stroke="#7f8ca1" stroke-width="1"/>
+              <line class="clock__hand" data-hand="hour" x1="12" y1="12" x2="12" y2="7" stroke="#f2ece1" stroke-width="1.6" stroke-linecap="round"/>
+              <line class="clock__hand" data-hand="minute" x1="12" y1="12" x2="12" y2="4.5" stroke="#f2ece1" stroke-width="1.1" stroke-linecap="round"/>
+              <line class="clock__hand" data-hand="second" x1="12" y1="13.5" x2="12" y2="4" stroke="#ff6a2b" stroke-width="0.7" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="1.1" fill="#ff6a2b"/>
+            </svg>
+            <p class="clock__text">
+              <span class="clock__time">SJO <time data-clock>--:--:--</time></span>
+              <span class="clock__zone">UTC−6 · Local</span>
+            </p>
+          </div>
+
+          <span class="thermal-badge" aria-hidden="true"><span class="dot dot--red"></span>Thermal</span>
+
+          <div class="portrait__footer">
+            <div class="portrait__chips">
+              <span class="chip"><span class="dot dot--accent" aria-hidden="true"></span>Remote · Costa Rica</span>
+              <span class="chip chip--mono">status: <span class="text-ok">200 OK</span></span>
+            </div>
+
+            <ul class="stats" aria-label="Quick facts">
+              <li class="stats__item">
+                <span class="stats__value">20+</span>
+                <span class="stats__label">yrs on the web</span>
+              </li>
+              <li class="stats__item">
+                <span class="stats__value stats__value--accent">15</span>
+                <span class="stats__label">yrs on the truck</span>
+              </li>
+              <li class="stats__item">
+                <span class="stats__value stats__value--ok">0s</span>
+                <span class="stats__label">downtime goal</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content card -->
+      <section class="card content" aria-labelledby="name">
+        <header class="content__header">
+          <h1 class="name" id="name">Rolando<br>Scott</h1>
+          <div class="role">
+            <span class="eyebrow">Currently</span>
+            <p class="role__title">
+              Solutions Lead at
+              <img class="role__logo" src="/assets/img/amazee-logo.webp" alt="amazee.io" width="128" height="55">
+            </p>
+          </div>
+        </header>
+
+        <div class="about">
+          <div class="about__bar">
+            <div class="about__prompt">
+              <span class="mono text-dim"><span class="text-accent">~/rolando $</span> cat about.md</span>
+              <button class="shell-btn" type="button" data-term-open aria-haspopup="dialog" aria-keyshortcuts="/">
+                <kbd>/</kbd>open shell
+              </button>
+            </div>
+            <div class="about__icons" aria-hidden="true">
+              <svg class="icon icon--accent" viewBox="0 0 24 24" focusable="false"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-6 1-9.5z"/></svg>
+              <svg class="icon" viewBox="0 0 24 24" focusable="false"><path d="M4 16c0-5 3.6-8.5 8-8.5s8 3.5 8 8.5"/><path d="M9 8.2 12 5l3 3.2"/><path d="M12 5v11"/><path d="M2 16h20v1.5c0 1-1 1.5-2 1.5H4c-1 0-2-.5-2-1.5z"/></svg>
+              <svg class="icon" viewBox="0 0 24 24" focusable="false"><path d="M8 21h8"/><path d="M9 21V10h6v11"/><path d="M8 10h8"/><path d="M10 10V7a2 2 0 0 1 4 0v3"/><path d="M7 13h2M15 13h2"/></svg>
+              <svg class="icon icon--rotate" viewBox="0 0 24 24" focusable="false"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+              <span class="mono text-dim">&lt;/&gt;</span>
+            </div>
+          </div>
+
+          <h2 class="tagline">
+            <span class="sr-only">I put out fires… No, really…</span>
+            <span class="tagline__ghost" aria-hidden="true">I put out fires… No, really…</span>
+            <span class="tagline__typed" aria-hidden="true" data-typewriter><span data-type-a>I put out fires… </span><span class="text-accent" data-type-b>No, really…</span><span class="cursor"></span></span>
+          </h2>
+
+          <p class="lead">I literally &amp; figuratively put out fires</p>
+
+          <p class="bio">I’ve spent most of my life fighting fires. For 15 years that meant real ones, as a volunteer firefighter; for even longer, it’s meant the digital kind. I’m Rolando Scott, an engineering leader with more than 20 years of experience building, securing and rescuing websites, mostly working remotely with companies, agencies and clients across the US. I’ve led teams as an engineering manager at an agency, and today I’m a solutions lead guiding a team of engineers and project managers, but I’ve never stopped doing the hands-on work myself. My focus is platform migrations, moving complex Drupal and WordPress estates between hosts without downtime, along with the security work that keeps them standing: WAF configuration, bot management, and getting sites back on their feet when something goes wrong. I’ve worked with names like Yahoo! and IBM and with hundreds of startups, and I still love the hard problems most people would rather avoid. Away from the keyboard I’m a father of three and an aviation enthusiast.</p>
+        </div>
+
+        <nav class="actions" aria-label="Contact">
+          <a class="cta cta--primary" href="https://teqqr.com" target="_blank" rel="noopener">
+            <span class="cta__pulse" aria-hidden="true"></span>
+            <span class="cta__text">
+              <span class="cta__eyebrow">Hire me / work with me</span>
+              <span class="cta__title">Head to teqqr.com</span>
+            </span>
+            <span class="cta__arrow" aria-hidden="true">→</span>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+          <a class="cta" href="https://www.linkedin.com/in/yourname" target="_blank" rel="noopener">
+            <span class="linkedin-mark" aria-hidden="true">in</span>
+            <span>LinkedIn</span>
+            <span class="sr-only">(opens in a new tab)</span>
+          </a>
+          <a class="cta" href="/cv.pdf" download>
+            <span>Download CV <span class="sr-only">(PDF)</span></span>
+            <span class="text-accent" aria-hidden="true">↓</span>
+          </a>
+        </nav>
+      </section>
+    </div>
+  </main>
+
+  <!-- Easter-egg terminal -->
+  <dialog class="term" aria-labelledby="term-title">
+    <div class="term__bar">
+      <span class="term__light term__light--red" aria-hidden="true"></span>
+      <span class="term__light term__light--yellow" aria-hidden="true"></span>
+      <span class="term__light term__light--green" aria-hidden="true"></span>
+      <h2 class="term__title" id="term-title"><span class="sr-only">Terminal: </span>rolando@sjo: ~</h2>
+      <button class="term__close" type="button" data-term-close aria-label="Close terminal">esc</button>
+    </div>
+    <div class="term__body" data-term-body>
+      <div class="term__log" role="log" aria-live="polite" data-term-log></div>
+      <form class="term__prompt" data-term-form>
+        <label class="text-accent" for="term-input">~/rolando $<span class="sr-only"> command</span></label>
+        <input class="term__input" id="term-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" autofocus>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>

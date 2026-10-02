@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;background:#0f1a2b;color:#f2ece1;-webkit-font-smoothing:antialiased}
+a{color:#f2ece1;text-decoration:none}
+a:hover{color:#ff6a2b}
+@keyframes rs-tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes rs-blink{50%{opacity:0}}
+@keyframes rs-alarm{0%{box-shadow:0 0 0 0 rgba(255,106,43,.6),0 0 0 0 rgba(255,106,43,0)}70%{box-shadow:0 0 0 12px rgba(255,106,43,0),0 0 34px 6px rgba(255,106,43,.35)}100%{box-shadow:0 0 0 0 rgba(255,106,43,0),0 0 0 0 rgba(255,106,43,0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</helmet>
+<main ref="{{ mainRef }}" onMouseMove="{{ onMove }}" onMouseLeave="{{ onLeave }}" style="min-height:100vh;display:flex;flex-direction:column;gap:clamp(12px,1.6vw,20px);padding:clamp(16px,2vw,28px);box-sizing:border-box;position:relative;overflow:hidden;background-color:#0f1a2b;background-image:linear-gradient(#142238 1px,transparent 1px),linear-gradient(90deg,#142238 1px,transparent 1px);background-size:44px 44px;font-family:'Instrument Sans',Helvetica,sans-serif;color:#f2ece1">
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <filter id="rs-thermal">
+      <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0 0 0 1 0"></feColorMatrix>
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.08 0.5 0.9 1 1"></feFuncR>
+        <feFuncG type="table" tableValues="0.02 0.04 0.22 0.62 0.97"></feFuncG>
+        <feFuncB type="table" tableValues="0.25 0.5 0.12 0 0.7"></feFuncB>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+  <sc-if value="{{ emberOn }}" hint-placeholder-val="{{ false }}">
+    <div ref="{{ glowRef }}" aria-hidden="true" style="position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .4s;background-image:radial-gradient(260px circle at var(--x,-600px) var(--y,-600px),rgba(255,106,43,0.12),transparent 70%),linear-gradient(rgba(255,106,43,0.55) 1px,transparent 1px),linear-gradient(90deg,rgba(255,106,43,0.55) 1px,transparent 1px);background-size:100% 100%,44px 44px,44px 44px;-webkit-mask-image:radial-gradient(220px circle at var(--x,-600px) var(--y,-600px),#000,transparent);mask-image:radial-gradient(220px circle at var(--x,-600px) var(--y,-600px),#000,transparent)"></div>
+  </sc-if>
+  <div style="flex:1;display:flex;flex-wrap:wrap-reverse;align-items:stretch;gap:clamp(16px,2vw,28px);position:relative;z-index:1">
+    <section data-screen-label="Portrait" onMouseEnter="{{ thermalIn }}" onMouseLeave="{{ thermalOut }}" style="flex:0.8 1 200px;max-width:100%;min-height:min(46vh,380px);position:relative;border-radius:22px;overflow:hidden;background:#18263b">
+      <div style="position:absolute;inset:0;filter:{{ portraitFilter }}">
+        <image-slot id="portrait-v5" shape="rect" placeholder="Your portrait"></image-slot>
+      </div>
+      <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none">
+        <svg viewBox="0 0 300 200" preserveAspectRatio="none" style="position:absolute;top:8%;left:6%;width:88%;height:30%;color:#ff6a2b;opacity:0.7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 7"><path d="M0 190 C 80 40, 200 20, 290 30"></path></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;top:calc(8% - 6px);right:3%;width:30px;height:30px;color:#ff6a2b;transform:rotate(80deg)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"></path></svg>
+        <sc-if value="{{ clockOn }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:10px;padding:6px 12px 6px 6px;border-radius:999px;background:rgba(10,18,31,0.82);border:1px solid #2c3d57">
+            <svg viewBox="0 0 24 24" style="width:28px;height:28px;display:block">
+              <circle cx="12" cy="12" r="11" fill="#0a121f" stroke="#3a4d6b" stroke-width="1"></circle>
+              <path d="M12 2.5v1.6M21.5 12h-1.6M12 21.5v-1.6M2.5 12h1.6" stroke="#7f8ca1" stroke-width="1"></path>
+              <line x1="12" y1="12" x2="12" y2="7" stroke="#f2ece1" stroke-width="1.6" stroke-linecap="round" transform="rotate({{ hourDeg }} 12 12)"></line>
+              <line x1="12" y1="12" x2="12" y2="4.5" stroke="#f2ece1" stroke-width="1.1" stroke-linecap="round" transform="rotate({{ minDeg }} 12 12)"></line>
+              <line x1="12" y1="13.5" x2="12" y2="4" stroke="#ff6a2b" stroke-width="0.7" stroke-linecap="round" transform="rotate({{ secDeg }} 12 12)"></line>
+              <circle cx="12" cy="12" r="1.1" fill="#ff6a2b"></circle>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:1px;font-family:'JetBrains Mono',monospace">
+              <span style="font-size:13px;font-weight:500;color:#f2ece1">SJO {{ clockTime }}</span>
+              <span style="font-size:10px;letter-spacing:0.06em;color:#9aa6b8">UTC−6 · LOCAL</span>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ thermalShown }}" hint-placeholder-val="{{ false }}">
+          <span style="position:absolute;top:58px;right:14px;display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#1a0f08;background:#ffb43a;padding:4px 8px;border-radius:6px"><span style="width:6px;height:6px;border-radius:50%;background:#c4122f;display:block"></span>THERMAL</span>
+        </sc-if>
+        <div style="position:absolute;left:14px;right:14px;bottom:14px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(15,26,43,0.85);font-size:13px;color:#f2ece1">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ff6a2b;display:block"></span>
+              <span>Remote · Costa Rica</span>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#f2ece1;background:rgba(15,26,43,0.85);padding:5px 9px;border-radius:6px">status: <span style="color:#7ee0a1">200 OK</span></span>
+          </div>
+          <sc-if value="{{ statsOn }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-radius:14px;background:rgba(10,18,31,0.88);border:1px solid #2c3d57;overflow:hidden">
+              <div style="display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-right:1px solid #22324c">
+                <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:700;line-height:1;color:#f2ece1">20+</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9aa6b8">yrs on the web</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-right:1px solid #22324c">
+                <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:700;line-height:1;color:#ff6a2b">15</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9aa6b8">yrs on the truck</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:2px;padding:10px 12px">
+                <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:700;line-height:1;color:#7ee0a1">0s</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9aa6b8">downtime goal</span>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+    <section data-screen-label="Content" style="position:relative;flex:1.7 1 440px;max-width:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(18px,2.6vh,32px);padding:clamp(18px,2.4vw,32px);border-radius:22px;background:rgba(15,26,43,0.92);border:1px solid #1e2e48">
+      <header style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 32px">
+        <h1 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(40px,5vw,80px);line-height:0.92;letter-spacing:-0.035em;color:#f2ece1">Rolando<br>Scott</h1>
+        <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+          <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#9aa6b8">Currently</span>
+          <div style="display:flex;align-items:center;gap:12px;font-size:17px;font-weight:500;color:#f2ece1">
+            <span>Solutions Lead at</span>
+            <image-slot id="amazee-logo-v5" shape="rect" fit="contain" placeholder="amazee.io logo" style="width:128px;height:55px;margin:-6px 0 -6px 8px"></image-slot>
+          </div>
+        </div>
+      </header>
+      <div style="display:flex;flex-direction:column;gap:clamp(12px,2vh,20px);border-top:1px solid #26354d;padding-top:clamp(18px,3vh,32px)">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#7f8ca1"><span style="color:#ff6a2b">~/rolando $</span> cat about.md</span>
+            <sc-if value="{{ terminalOn }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ openTerm }}" style="appearance:none;display:flex;align-items:center;gap:6px;padding:3px 8px 3px 4px;border-radius:6px;border:1px solid #2c3d57;background:#0a121f;color:#9aa6b8;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer" style-hover="border-color:#ff6a2b;color:#f2ece1"><span style="padding:1px 6px;border-radius:4px;background:#22324c;color:#f2ece1">/</span>open shell</button>
+            </sc-if>
+          </div>
+          <div aria-hidden="true" style="display:flex;align-items:center;gap:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;display:block;color:#ff6a2b;"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-6 1-9.5z"></path></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;display:block;color:#7f8ca1;"><path d="M4 16c0-5 3.6-8.5 8-8.5s8 3.5 8 8.5"></path><path d="M9 8.2 12 5l3 3.2"></path><path d="M12 5v11"></path><path d="M2 16h20v1.5c0 1-1 1.5-2 1.5H4c-1 0-2-.5-2-1.5z"></path></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;display:block;color:#7f8ca1;"><path d="M8 21h8"></path><path d="M9 21V10h6v11"></path><path d="M8 10h8"></path><path d="M10 10V7a2 2 0 0 1 4 0v3"></path><path d="M7 13h2M15 13h2"></path></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;display:block;color:#7f8ca1;transform:rotate(90deg)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"></path></svg><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#7f8ca1">&lt;/&gt;</span></div>
+        </div>
+        <h2 aria-label="I put out fires… No, really…" style="margin:0;display:grid;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(28px,3vw,44px);line-height:1.05;letter-spacing:-0.02em;color:#f2ece1;text-wrap:balance">
+          <span aria-hidden="true" style="grid-area:1/1;visibility:hidden">I put out fires… No, really…</span>
+          <span aria-hidden="true" style="grid-area:1/1">{{ typedA }}<span style="color:#ff6a2b">{{ typedB }}</span>{{ cursorEl }}</span>
+        </h2>
+        <p style="margin:0;font-size:clamp(16px,1.3vw,19px);font-weight:500;color:#ffb48a">I literally &amp; figuratively put out fires</p>
+        <p style="margin:0;max-width:72ch;font-size:clamp(14px,1vw,15.5px);line-height:1.55;color:#c6cdd8;text-wrap:pretty">I’ve spent most of my life fighting fires. For 15 years that meant real ones, as a volunteer firefighter; for even longer, it’s meant the digital kind. I’m Rolando Scott, an engineering leader with more than 20 years of experience building, securing and rescuing websites, mostly working remotely with companies, agencies and clients across the US. I’ve led teams as an engineering manager at an agency, and today I’m a solutions lead guiding a team of engineers and project managers, but I’ve never stopped doing the hands-on work myself. My focus is platform migrations, moving complex Drupal and WordPress estates between hosts without downtime, along with the security work that keeps them standing: WAF configuration, bot management, and getting sites back on their feet when something goes wrong. I’ve worked with names like Yahoo! and IBM and with hundreds of startups, and I still love the hard problems most people would rather avoid. Away from the keyboard I’m a father of three and an aviation enthusiast.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:stretch">
+        <a href="https://teqqr.com" target="_blank" style="position:relative;flex:1 1 300px;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;background:#ff6a2b;color:#1a0f08" style-hover="background:#ff7f45;color:#1a0f08">
+          {{ pulseEl }}
+          <span style="display:flex;flex-direction:column;gap:2px">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#1a0f08">Hire me / work with me</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:600;color:#1a0f08">Head to teqqr.com</span>
+          </span>
+          <span style="font-size:24px;color:#1a0f08">→</span>
+        </a>
+        <a href="https://www.linkedin.com/in/yourname" target="_blank" style="flex:0 1 auto;display:flex;align-items:center;gap:10px;padding:18px 22px;border-radius:16px;border:1px solid #2c3d57;background:#14223a;font-size:15px;font-weight:600" style-hover="border-color:#ff6a2b;color:#f2ece1">
+          <span style="width:24px;height:24px;border-radius:5px;background:#0a66c2;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Helvetica,Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:-0.02em">in</span>
+          <span>LinkedIn</span>
+        </a>
+        <a href="./cv.pdf" download="" style="flex:0 1 auto;display:flex;align-items:center;gap:10px;padding:18px 22px;border-radius:16px;border:1px solid #2c3d57;background:#14223a;font-size:15px;font-weight:600" style-hover="border-color:#ff6a2b;color:#f2ece1">
+          <span>Download CV</span>
+          <span style="color:#ff6a2b">↓</span>
+        </a>
+      </div>
+    </section>
+  </div>
+  
+  <sc-if value="{{ termOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeTerm }}" style="position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(5,10,18,0.6);backdrop-filter:blur(4px)">
+      <div onClick="{{ stop }}" role="dialog" aria-label="Terminal" style="width:min(640px,100%);height:min(420px,80vh);display:flex;flex-direction:column;border-radius:14px;overflow:hidden;background:#0a121f;border:1px solid #2c3d57;box-shadow:0 30px 80px rgba(0,0,0,0.5);font-family:'JetBrains Mono',monospace;font-size:13px">
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:#0f1a2b;border-bottom:1px solid #1e2e48">
+          <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57;display:block"></span>
+          <span style="width:11px;height:11px;border-radius:50%;background:#febc2e;display:block"></span>
+          <span style="width:11px;height:11px;border-radius:50%;background:#28c840;display:block"></span>
+          <span style="flex:1;text-align:center;color:#9aa6b8;font-size:12px">rolando@sjo: ~</span>
+          <button onClick="{{ closeTerm }}" style="appearance:none;border:1px solid #2c3d57;background:transparent;color:#9aa6b8;border-radius:5px;padding:2px 7px;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer">esc</button>
+        </div>
+        <div ref="{{ termBodyRef }}" onClick="{{ focusTerm }}" style="flex:1;overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:3px;line-height:1.5">
+          <sc-for list="{{ lines }}" as="line" hint-placeholder-count="2">
+            <div style="white-space:pre-wrap;color:{{ line.color }}">{{ line.text }}</div>
+          </sc-for>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="flex:none;color:#ff6a2b">~/rolando $</span>
+            <input ref="{{ termInputRef }}" value="{{ termInput }}" onChange="{{ onTermChange }}" onKeyDown="{{ onTermKey }}" spellcheck="false" autocomplete="off" aria-label="Command" style="flex:1;min-width:0;border:0;outline:none;background:transparent;color:#f2ece1;font-family:'JetBrains Mono',monospace;font-size:13px;caret-color:#ff6a2b;padding:0">
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;typing&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Features&quot;},&quot;thermal&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Features&quot;},&quot;clock&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Features&quot;},&quot;stats&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Features&quot;},&quot;terminal&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Features&quot;},&quot;ember&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Features&quot;},&quot;alarmPulse&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Features&quot;}}">
+const LOG = [
+  { t: '[resolved]', c: '#7ee0a1', m: 'DNS cutover complete · 0s downtime' },
+  { t: '[blocked]', c: '#ff6a2b', m: '14,203 bad bots at the edge' },
+  { t: '[migrated]', c: '#7ec8ff', m: '1.2 TB Drupal estate → new host' },
+  { t: '[patched]', c: '#7ee0a1', m: 'WordPress core + 38 plugins' },
+  { t: '[waf]', c: '#ffb43a', m: 'rule 942100 tuned · false positives ↓' },
+  { t: '[landed]', c: '#7ec8ff', m: 'SJO · runway 07 · wind calm' },
+  { t: '[cache]', c: '#7ee0a1', m: 'hit ratio 97.4%' },
+  { t: '[on-call]', c: '#ffb43a', m: 'coffee level nominal' }
+];
+const A = 'I put out fires… ', B = 'No, really…';
+const DIM = '#7f8ca1', TXT = '#c6cdd8', HI = '#ff6a2b';
+
+class Component extends DCLogic {
+  state = { a: 0, b: 0, now: Date.now(), thermal: false, termOpen: false, termInput: '', lines: [] };
+  mainRef = React.createRef(); glowRef = React.createRef(); termInputRef = React.createRef(); termBodyRef = React.createRef();
+  on(k) { return this.props[k] ?? true; }
+
+  componentDidMount() {
+    this.clock = setInterval(() => this.setState({ now: Date.now() }), 1000);
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) this.setState({ a: A.length, b: B.length }); else this.type();
+    this.onKey = (e) => {
+      if (this.state.termOpen) { if (e.key === 'Escape') this.close(); return; }
+      const t = e.target, typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+      if (!typing && this.on('terminal') && (e.key === '/' || e.key === '`')) { e.preventDefault(); this.open(); }
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { clearInterval(this.clock); clearTimeout(this.t); window.removeEventListener('keydown', this.onKey); }
+  componentDidUpdate() {
+    const { termOpen, lines } = this.state;
+    if (termOpen && !this._prevOpen) this.termInputRef.current?.focus();
+    if (lines !== this._prevLines && this.termBodyRef.current) this.termBodyRef.current.scrollTop = 1e6;
+    this._prevOpen = termOpen; this._prevLines = lines;
+  }
+  type() {
+    let paused = false;
+    const step = () => {
+      const { a, b } = this.state;
+      if (a < A.length) { this.setState({ a: a + 1 }); this.t = setTimeout(step, 55); }
+      else if (!paused) { paused = true; this.t = setTimeout(step, 750); }
+      else if (b < B.length) { this.setState({ b: b + 1 }); this.t = setTimeout(step, 75); }
+    };
+    this.t = setTimeout(step, 500);
+  }
+  sjo() {
+    const f = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/Costa_Rica', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+    const p = Object.fromEntries(f.formatToParts(new Date(this.state.now)).map(x => [x.type, x.value]));
+    return { h: +p.hour % 24, m: +p.minute, s: +p.second, str: `${p.hour}:${p.minute}:${p.second}` };
+  }
+  open() {
+    this.setState(s => ({ termOpen: true, lines: s.lines.length ? s.lines : [
+      { text: 'rolando-os v20.26 — volunteer firefighter edition', color: TXT },
+      { text: 'Type "help" to see what I can do.', color: DIM }
+    ] }));
+  }
+  close() { this.setState({ termOpen: false }); }
+  run(raw) {
+    const cmd = raw.trim().toLowerCase();
+    const out = [{ text: '~/rolando $ ' + raw, color: '#f2ece1' }];
+    const say = (text, color = TXT) => out.push({ text, color });
+    switch (cmd) {
+      case '': break;
+      case 'help':
+        say('whoami     who is this guy?');
+        say('hire       work with me (opens teqqr.com)');
+        say('cv         download my CV');
+        say('linkedin   connect on LinkedIn');
+        say('fly        file a flight plan');
+        say('fire       run a fire check');
+        say('time       local time in Costa Rica');
+        say('clear      clear the screen');
+        say('exit       close this shell'); break;
+      case 'whoami':
+        say('Rolando Scott — Solutions Lead @ amazee.io');
+        say('20+ yrs building, securing & rescuing websites · 15 yrs volunteer firefighter', DIM);
+        say('Drupal & WordPress migrations · WAF · bot management · incident response', DIM); break;
+      case 'hire': case 'teqqr':
+        say('Dispatching to teqqr.com…', HI); window.open('https://teqqr.com', '_blank'); break;
+      case 'linkedin':
+        say('Opening LinkedIn…', HI); window.open('https://www.linkedin.com/in/yourname', '_blank'); break;
+      case 'cv': {
+        say('Downloading cv.pdf…', HI);
+        const l = document.createElement('a'); l.href = './cv.pdf'; l.download = ''; document.body.appendChild(l); l.click(); l.remove(); break;
+      }
+      case 'fly':
+        say('          __|__', HI);
+        say('   --o--o--(_)--o--o--', HI);
+        say('FLIGHT PLAN  SJO → anywhere · ALT 35,000ft · cleared for takeoff', DIM); break;
+      case 'fire': case 'fires':
+        say('Scanning for fires… ▓▓▓▓▓▓▓▓▓▓ 100%', DIM);
+        say('0 active incidents. All systems nominal.', '#7ee0a1');
+        say('Got one burning? → type "hire"', DIM); break;
+      case 'time': say(`SJO ${this.sjo().str} (UTC−6)`); break;
+      case 'sudo': case 'sudo su': say('Nice try. Permission denied.', HI); break;
+      case 'clear': this.setState({ lines: [], termInput: '' }); return;
+      case 'exit': case 'quit': this.setState({ termOpen: false, termInput: '' }); return;
+      default: say(`command not found: ${cmd} — try "help"`, HI);
+    }
+    this.setState(s => ({ lines: s.lines.concat(out), termInput: '' }));
+  }
+
+  renderVals() {
+    const typing = this.on('typing');
+    const a = typing ? this.state.a : A.length, b = typing ? this.state.b : B.length;
+    const t = this.sjo();
+    const h = React.createElement;
+    const items = LOG.concat(LOG).map((l, i) => h('span', { key: i, style: { display: 'inline-flex', gap: 8, paddingRight: 40, whiteSpace: 'nowrap' } },
+      h('span', { style: { color: l.c } }, l.t), h('span', { style: { color: TXT } }, l.m)));
+    const thermalShown = this.on('thermal') && this.state.thermal;
+    return {
+      mainRef: this.mainRef, glowRef: this.glowRef, termInputRef: this.termInputRef, termBodyRef: this.termBodyRef,
+      emberOn: this.on('ember'), tickerOn: this.on('ticker'), clockOn: this.on('clock'), statsOn: this.on('stats'), terminalOn: this.on('terminal'),
+      onMove: (e) => {
+        const g = this.glowRef.current, m = this.mainRef.current; if (!g || !m) return;
+        const r = m.getBoundingClientRect();
+        g.style.setProperty('--x', (e.clientX - r.left) + 'px'); g.style.setProperty('--y', (e.clientY - r.top) + 'px'); g.style.opacity = '1';
+      },
+      onLeave: () => { if (this.glowRef.current) this.glowRef.current.style.opacity = '0'; },
+      thermalIn: () => this.setState({ thermal: true }), thermalOut: () => this.setState({ thermal: false }),
+      thermalShown, portraitFilter: thermalShown ? 'url(#rs-thermal) contrast(1.1)' : 'none',
+      clockTime: t.str, hourDeg: (t.h % 12) * 30 + t.m * 0.5, minDeg: t.m * 6 + t.s * 0.1, secDeg: t.s * 6,
+      typedA: A.slice(0, a), typedB: B.slice(0, b),
+      cursorEl: typing ? h('span', { style: { display: 'inline-block', width: '0.08em', height: '0.85em', background: HI, marginLeft: '0.08em', verticalAlign: '-0.06em', animation: 'rs-blink 1s steps(1) infinite' } }) : null,
+      pulseEl: this.on('alarmPulse') ? h('span', { 'aria-hidden': true, style: { position: 'absolute', inset: 0, borderRadius: 16, pointerEvents: 'none', animation: 'rs-alarm 2.4s ease-out infinite' } }) : null,
+      tickerEl: h('div', { style: { display: 'flex', width: 'max-content', animation: 'rs-tick 60s linear infinite' } }, items),
+      termOpen: this.state.termOpen, termInput: this.state.termInput, lines: this.state.lines,
+      openTerm: () => this.open(), closeTerm: () => this.close(), stop: (e) => e.stopPropagation(),
+      focusTerm: () => this.termInputRef.current?.focus(),
+      onTermChange: (e) => this.setState({ termInput: e.target.value }),
+      onTermKey: (e) => { if (e.key === 'Enter') this.run(this.state.termInput); else if (e.key === 'Escape') this.close(); }
+    };
+  }
+}
+</script>
+</body>
+</html>
