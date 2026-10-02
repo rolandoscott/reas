@@ -25,6 +25,14 @@ public/
 
 - Add `public/cv.pdf`.
 
+## Email signature
+
+`email-signature/signature.html` holds an HTML email signature (inline styles on
+purpose — mail clients ignore external CSS). Open it in a browser, select the
+signature, copy, and paste it into your mail client's signature settings.
+Its headshot loads from `https://reas.cr/assets/img/email/rolando-signature.png`,
+so it only shows once reas.cr serves this site.
+
 ## Local preview
 
 ```sh
