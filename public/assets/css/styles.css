@@ -175,9 +175,9 @@ kbd { font: inherit; }
   padding: clamp(16px, 4vw, 56px);
   overflow: hidden;
   background-color: var(--c-bg);
-  /* Faint doodles of computers and code, tiled behind the cards */
-  background-image: url('../img/bg-doodles.svg');
-  background-size: 560px 560px;
+  /* Faint circuit-board traces, tiled behind the cards */
+  background-image: url('../img/bg-circuit.svg');
+  background-size: 720px 720px;
 }
 
 .layout {
