@@ -22,8 +22,6 @@ public/
 ## Before going live
 
 - Add `public/cv.pdf`.
-- Replace the LinkedIn placeholder URL (`https://www.linkedin.com/in/yourname`) in
-  `public/index.html` and `LINKS.linkedin` in `public/assets/js/main.js`.
 
 ## Local preview
 

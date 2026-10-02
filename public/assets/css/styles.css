@@ -62,7 +62,6 @@
 :root {
   /* Light: white surfaces, near-black text, one red accent */
   --c-bg: #f7f7f5;
-  --c-grid: #ebebe8;
   --c-panel: #e9e9e7;
   --c-surface: rgba(255, 255, 255, 0.96);
   --c-surface-glass: rgba(255, 255, 255, 0.9);
@@ -97,7 +96,6 @@
 
   --radius-card: 22px;
   --radius-cta: 16px;
-  --grid-size: 44px;
   --gap: clamp(16px, 2vw, 28px);
 }
 
@@ -177,10 +175,9 @@ kbd { font: inherit; }
   padding: clamp(16px, 4vw, 56px);
   overflow: hidden;
   background-color: var(--c-bg);
-  background-image:
-    linear-gradient(var(--c-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--c-grid) 1px, transparent 1px);
-  background-size: var(--grid-size) var(--grid-size);
+  /* Faint doodles of computers and code, tiled behind the cards */
+  background-image: url('../img/bg-doodles.svg');
+  background-size: 560px 560px;
 }
 
 .layout {

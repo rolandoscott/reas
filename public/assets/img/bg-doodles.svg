@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="640" height="640" viewBox="0 0 640 640">
+  <!-- Repeating background tile: faint line drawings of computer things -->
+  <defs>
+    <symbol id="monitor" viewBox="0 0 48 48"><rect x="4" y="6" width="40" height="28" rx="3"/><path d="M18 42h12M24 34v8M10 14h12M10 20h20M10 26h8"/></symbol>
+    <symbol id="laptop" viewBox="0 0 48 48"><rect x="9" y="10" width="30" height="20" rx="2"/><path d="M4 36h40l-3 4H7zM14 16l4 3-4 3M21 23h6"/></symbol>
+    <symbol id="terminal" viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="3"/><path d="M4 15h40M11 23l5 4-5 4M20 31h9M9 11.5h0M13 11.5h0M17 11.5h0"/></symbol>
+    <symbol id="code" viewBox="0 0 48 48"><path d="M16 14 6 24l10 10M32 14l10 10-10 10M27 10l-6 28"/></symbol>
+    <symbol id="braces" viewBox="0 0 48 48"><path d="M18 8c-4 0-5 2-5 5v6c0 3-2 5-5 5 3 0 5 2 5 5v6c0 3 1 5 5 5M30 8c4 0 5 2 5 5v6c0 3 2 5 5 5-3 0-5 2-5 5v6c0 3-1 5-5 5"/></symbol>
+    <symbol id="floppy" viewBox="0 0 48 48"><path d="M8 6h26l6 6v30H8zM15 6v10h16V6M14 42V28h20v14M26 9v4"/></symbol>
+    <symbol id="chip" viewBox="0 0 48 48"><rect x="13" y="13" width="22" height="22" rx="2"/><rect x="19" y="19" width="10" height="10"/><path d="M18 13V7M24 13V7M30 13V7M18 41v-6M24 41v-6M30 41v-6M13 18H7M13 24H7M13 30H7M41 18h-6M41 24h-6M41 30h-6"/></symbol>
+    <symbol id="server" viewBox="0 0 48 48"><rect x="8" y="6" width="32" height="10" rx="2"/><rect x="8" y="19" width="32" height="10" rx="2"/><rect x="8" y="32" width="32" height="10" rx="2"/><path d="M13 11h2M13 24h2M13 37h2M30 11h5M30 24h5M30 37h5"/></symbol>
+    <symbol id="keyboard" viewBox="0 0 48 48"><rect x="3" y="14" width="42" height="20" rx="3"/><path d="M9 20h2M15 20h2M21 20h2M27 20h2M33 20h2M39 20h0M9 26h2M15 26h2M21 26h2M27 26h2M33 26h2M39 26h0M14 30h20"/></symbol>
+    <symbol id="database" viewBox="0 0 48 48"><ellipse cx="24" cy="11" rx="15" ry="5"/><path d="M9 11v26c0 3 7 5 15 5s15-2 15-5V11M9 20c0 3 7 5 15 5s15-2 15-5M9 29c0 3 7 5 15 5s15-2 15-5"/></symbol>
+    <symbol id="git" viewBox="0 0 48 48"><circle cx="14" cy="10" r="4"/><circle cx="14" cy="38" r="4"/><circle cx="34" cy="18" r="4"/><path d="M14 14v20M34 22c0 8-12 6-18 13"/></symbol>
+    <symbol id="cloud" viewBox="0 0 48 48"><path d="M14 36h22a8 8 0 0 0 0-16 12 12 0 0 0-23-2A9 9 0 0 0 14 36z"/></symbol>
+    <symbol id="bug" viewBox="0 0 48 48"><ellipse cx="24" cy="28" rx="9" ry="12"/><path d="M19 17a5 5 0 0 1 10 0M24 18v22M19 14l-4-5M29 14l4-5M15 25H7M41 25h-8M15 33l-7 4M33 33l7 4"/></symbol>
+    <symbol id="coffee" viewBox="0 0 48 48"><path d="M8 18h26v12a10 10 0 0 1-10 10h-6A10 10 0 0 1 8 30zM34 22h3a5 5 0 0 1 0 10h-3M16 8c-2 3 2 4 0 7M24 8c-2 3 2 4 0 7"/></symbol>
+    <symbol id="wifi" viewBox="0 0 48 48"><path d="M6 18a26 26 0 0 1 36 0M12 25a17 17 0 0 1 24 0M18 32a8 8 0 0 1 12 0M24 38h0"/></symbol>
+    <symbol id="cursor" viewBox="0 0 48 48"><path d="M12 6v30l8-7 5 12 5-2-5-12h11z"/></symbol>
+    <symbol id="lock" viewBox="0 0 48 48"><rect x="10" y="22" width="28" height="20" rx="3"/><path d="M16 22v-6a8 8 0 0 1 16 0v6M24 30v5"/></symbol>
+    <symbol id="shield" viewBox="0 0 48 48"><path d="M24 5l16 6v12c0 10-7 17-16 20C15 40 8 33 8 23V11zM17 24l5 5 9-10"/></symbol>
+  </defs>
+
+  <g fill="none" stroke="#d3d3ce" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#monitor"  x="40"  y="30"  width="60" height="60" transform="rotate(-8 70 60)"/>
+    <use href="#code"     x="215" y="55"  width="44" height="44" transform="rotate(6 237 77)"/>
+    <use href="#server"   x="385" y="20"  width="52" height="52"/>
+    <use href="#coffee"   x="545" y="60"  width="46" height="46" transform="rotate(10 568 83)"/>
+    <use href="#floppy"   x="120" y="165" width="46" height="46" transform="rotate(12 143 188)"/>
+    <use href="#database" x="300" y="175" width="50" height="50" transform="rotate(-6 325 200)"/>
+    <use href="#chip"     x="500" y="190" width="50" height="50"/>
+    <use href="#keyboard" x="30"  y="290" width="64" height="64" transform="rotate(-4 62 322)"/>
+    <use href="#terminal" x="200" y="270" width="58" height="58" transform="rotate(4 229 299)"/>
+    <use href="#bug"      x="395" y="290" width="44" height="44" transform="rotate(-12 417 312)"/>
+    <use href="#git"      x="555" y="320" width="48" height="48" transform="rotate(8 579 344)"/>
+    <use href="#lock"     x="120" y="425" width="44" height="44" transform="rotate(-6 142 447)"/>
+    <use href="#laptop"   x="270" y="420" width="64" height="64"/>
+    <use href="#braces"   x="470" y="440" width="44" height="44"/>
+    <use href="#cloud"    x="555" y="525" width="52" height="52" transform="rotate(-4 581 551)"/>
+    <use href="#shield"   x="30"  y="560" width="44" height="44" transform="rotate(6 52 582)"/>
+    <use href="#wifi"     x="375" y="555" width="44" height="44"/>
+    <use href="#cursor"   x="215" y="575" width="36" height="36" transform="rotate(-10 233 593)"/>
+  </g>
+
+  <g fill="#d3d3ce" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13">
+    <text x="20"  y="140">&lt;?php</text>
+    <text x="330" y="140" transform="rotate(-3 330 140)">git push origin main</text>
+    <text x="470" y="160">200 OK</text>
+    <text x="130" y="262">drush cr</text>
+    <text x="450" y="275">0101 1101</text>
+    <text x="190" y="385" transform="rotate(2 190 385)">SELECT * FROM sites;</text>
+    <text x="40"  y="405">sudo !!</text>
+    <text x="400" y="410">wp core update</text>
+    <text x="550" y="440">=&gt; { }</text>
+    <text x="70"  y="520" transform="rotate(-2 70 520)">#!/bin/bash</text>
+    <text x="440" y="625">ssh root@sjo</text>
+  </g>
+</svg>

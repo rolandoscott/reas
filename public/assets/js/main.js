@@ -6,7 +6,7 @@
 
   const LINKS = {
     hire: 'https://teqqr.com',
-    linkedin: 'https://www.linkedin.com/in/yourname',
+    linkedin: 'https://www.linkedin.com/in/rolandoscott/',
     cv: '/cv.pdf'
   };
 
