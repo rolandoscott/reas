@@ -86,15 +86,6 @@
     page.addEventListener('mouseleave', () => ember.classList.remove('is-active'));
   }
 
-  /* ---- Portrait fallback ------------------------------------------------ */
-  function initPortrait() {
-    const img = document.querySelector('.portrait__img');
-    if (!img) return;
-    const hide = () => img.classList.add('is-missing');
-    if (img.complete && img.naturalWidth === 0) hide();
-    else img.addEventListener('error', hide);
-  }
-
   /* ---- Terminal --------------------------------------------------------- */
   function initTerminal() {
     const dialog = document.querySelector('.term');
@@ -231,6 +222,5 @@
   initClock();
   initTypewriter();
   initEmber();
-  initPortrait();
   initTerminal();
 })();
