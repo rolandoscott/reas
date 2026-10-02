@@ -80,13 +80,12 @@
   --c-body: #3a3a3a;
   --c-muted: #5f5f5f;
   --c-dim: #6e6e6e;
-  --c-soft-accent: #c8102e;
+  --c-soft-accent: #c00;
 
-  /* "Fire engine" red — passes WCAG AA as text on white and behind white text */
-  --c-accent: #c8102e;
-  --c-accent-rgb: 200, 16, 46;
-  --c-fill: #c8102e;
-  --c-fill-hover: #a50d26;
+  /* Red (#cc0000) — 5.9:1 as text on white and behind white text (WCAG AA) */
+  --c-accent: #c00;
+  --c-fill: #c00;
+  --c-fill-hover: #a30000;
   --c-on-fill: #fff;
   --c-blue: #0961bb;
   --c-blue: oklch(0.5 0.16 255);
