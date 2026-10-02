@@ -88,7 +88,8 @@
   --c-fill: #c8102e;
   --c-fill-hover: #a50d26;
   --c-on-fill: #fff;
-  --c-ok: #15803d;
+  --c-blue: #0961bb;
+  --c-blue: oklch(0.5 0.16 255);
 
   --f-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --f-body: 'Instrument Sans', Helvetica, Arial, sans-serif;
@@ -229,22 +230,27 @@ kbd { font: inherit; }
   object-position: 40% 30%;
 }
 
-/* Halftone print effect: a rotated dot screen is colour-dodged onto a dark,
-   softened greyscale photo, then extreme contrast snaps it to solid ink dots. */
-.halftone {
+/* Line-engraving effect (like a banknote portrait): a fine angled line screen
+   is colour-dodged onto a dark, softened greyscale photo, then extreme
+   contrast snaps it to solid ink lines whose width follows the tone. The
+   lines are drawn at an angle directly (not rotated) to avoid moiré. */
+.engraving {
+  --line-pitch: 5px;
   overflow: hidden;
   background: #fff;
   filter: contrast(20);
 }
-.halftone .portrait__img { filter: grayscale(1) brightness(0.5) contrast(1.3) blur(1px); }
-.halftone::after {
+.engraving .portrait__img { filter: grayscale(1) brightness(0.5) contrast(1.3) blur(1px); }
+.engraving::after {
   content: '';
   position: absolute;
-  inset: -50%;
-  background: radial-gradient(circle, #000, #fff) 0 0 / 5px 5px;
+  inset: 0;
+  background: repeating-linear-gradient(150deg, #fff 0, #000 calc(var(--line-pitch) / 2), #fff var(--line-pitch));
   mix-blend-mode: color-dodge;
-  transform: rotate(25deg);
   pointer-events: none;
+}
+@media (max-width: 700px) {
+  .engraving { --line-pitch: 4px; }
 }
 
 .portrait__overlay {
@@ -304,7 +310,7 @@ kbd { font: inherit; }
   color: var(--c-ink);
 }
 .stats__value--accent { color: var(--c-accent); }
-.stats__value--ok { color: var(--c-ok); }
+.stats__value--blue { color: var(--c-blue); }
 
 .stats__label {
   font-family: var(--f-mono);
