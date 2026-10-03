@@ -10,7 +10,7 @@
   Cache-Control: public, max-age=86400, must-revalidate
 
 /cv.pdf
-  Content-Disposition: attachment; filename="Rolando-Scott-CV.pdf"
+  Content-Disposition: attachment; filename="rolando-scott-principal-engineer.pdf"
 
 /assets/fonts/*
   ! Cache-Control

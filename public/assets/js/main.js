@@ -7,7 +7,8 @@
   const LINKS = {
     hire: 'https://teqqr.com',
     linkedin: 'https://www.linkedin.com/in/rolandoscott/',
-    cv: '/cv.pdf'
+    cv: '/cv.pdf',
+    cvFilename: 'rolando-scott-principal-engineer.pdf'
   };
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -143,10 +144,10 @@
 
     const openUrl = url => window.open(url, '_blank', 'noopener');
 
-    const download = url => {
+    const download = (url, filename = '') => {
       const a = document.createElement('a');
       a.href = url;
-      a.download = '';
+      a.download = filename;
       document.body.append(a);
       a.click();
       a.remove();
@@ -180,8 +181,8 @@
         openUrl(LINKS.linkedin);
       },
       cv() {
-        print('Downloading cv.pdf…', 'hi');
-        download(LINKS.cv);
+        print(`Downloading ${LINKS.cvFilename}…`, 'hi');
+        download(LINKS.cv, LINKS.cvFilename);
       },
       async fly(query) {
         print('          __|__', 'hi');

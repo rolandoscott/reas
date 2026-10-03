@@ -21,10 +21,6 @@ public/
 
 `design-source/` holds the original Claude Design export for reference; it is not deployed.
 
-## Before going live
-
-- Add `public/cv.pdf`.
-
 ## Email signature
 
 `email-signature/signature.html` holds an HTML email signature (inline styles on
