@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://reas.cr/sitemap.xml
